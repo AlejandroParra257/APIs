@@ -10,6 +10,15 @@ app.get('/api/parcial2', (req, res) => {
     });
 });
 
+// manejo de errores implementada
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({
+        error: "Algo salió mal en el servidor",
+        mensaje: err.message
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
